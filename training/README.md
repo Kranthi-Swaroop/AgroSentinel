@@ -34,9 +34,9 @@ Generates accuracy metrics and confusion matrix.
 
 ## Model Architecture
 
-- **Base Model**: EfficientNet-B2 (pretrained on ImageNet)
-- **Input Size**: 224x224 RGB
-- **Output**: 21+ classes (Indian crop diseases)
+- **Base Model**: EfficientNet-B3 (pretrained on ImageNet)
+- **Input Size**: 260x260 RGB
+- **Output**: 15 classes (Indian crop diseases)
 
 ## Training Features
 
