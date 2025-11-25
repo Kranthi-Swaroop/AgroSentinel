@@ -61,29 +61,6 @@ npm run dev
 
 Open http://localhost:3000
 
-## ☁️ Deploy to Railway (Recommended)
-
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Ready for deployment"
-   git push origin main
-   ```
-
-2. **Deploy on Railway**
-   - Go to [railway.app](https://railway.app)
-   - Click "New Project" → "Deploy from GitHub"
-   - Select your `AgroVision` repository
-   - Add environment variables:
-     - `MONGODB_URI` - Get free MongoDB Atlas: [mongodb.com/atlas](https://mongodb.com/atlas)
-     - `OPENWEATHERMAP_API_KEY` - Get free: [openweathermap.org/api](https://openweathermap.org/api)
-     - `GEMINI_API_KEY` - Get free: [makersuite.google.com](https://makersuite.google.com/app/apikey)
-   - Railway will auto-detect and deploy!
-
-3. **Add MongoDB** (if using Railway's built-in)
-   - Click "New" → "Database" → "MongoDB"
-   - Copy the connection string to `MONGODB_URI`
-
 ## 📱 Supported Crops & Diseases
 
 | Crop | Diseases Detected |
