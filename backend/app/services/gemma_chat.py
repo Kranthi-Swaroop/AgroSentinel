@@ -1,6 +1,6 @@
 """
-AgroSentinel Gemini AI Chat Service
-Uses Google's Gemini API for intelligent agricultural assistance
+AgroSentinel Gemma AI Chat Service
+Uses Google's Gemma model via Generative AI API for intelligent agricultural assistance
 """
 
 import google.generativeai as genai
@@ -125,7 +125,7 @@ SYSTEM_CONTEXT = """You are AgroSentinel AI Assistant, an expert agricultural ad
 
 Remember: You are helping real farmers protect their livelihoods. Be accurate, helpful, and practical."""
 
-class GeminiChatService:
+class GemmaChatService:
     def __init__(self, api_key: str):
         self.api_key = api_key
         self.model = None
@@ -133,11 +133,11 @@ class GeminiChatService:
         self._initialize()
     
     def _initialize(self):
-        """Initialize Gemini API"""
+        """Initialize Gemma API"""
         try:
             genai.configure(api_key=self.api_key)
             self.model = genai.GenerativeModel(
-                model_name='gemini-2.0-flash',
+                model_name='gemma-2-9b-it',
                 generation_config={
                     'temperature': 0.7,
                     'top_p': 0.8,
@@ -152,7 +152,7 @@ class GeminiChatService:
                 ]
             )
         except Exception as e:
-            print(f"[GeminiChat] Failed to initialize: {e}")
+            print(f"[GemmaChat] Failed to initialize: {e}")
             self.model = None
     
     def get_or_create_session(self, session_id: str):
@@ -165,12 +165,12 @@ class GeminiChatService:
                     chat.send_message(f"SYSTEM CONTEXT (remember this for all responses):\n{SYSTEM_CONTEXT}")
                     self.chat_sessions[session_id] = chat
                 except Exception as e:
-                    print(f"[GeminiChat] Failed to initialize session: {e}")
+                    print(f"[GemmaChat] Failed to initialize session: {e}")
                     return None
         return self.chat_sessions.get(session_id)
     
     async def send_message(self, message: str, language: str = "en", session_id: str = None) -> Dict:
-        """Send message to Gemini and get response"""
+        """Send message to Gemma and get response"""
         
         if not self.model:
             return self._fallback_response(message, language)
@@ -208,16 +208,16 @@ class GeminiChatService:
             return {
                 "response": response_text,
                 "suggestions": suggestions,
-                "intent": "gemini_response",
+                "intent": "gemma_response",
                 "detected_disease": None,
                 "detected_crop": None,
                 "language": language,
                 "timestamp": datetime.now().isoformat(),
-                "model": "gemini-2.0-flash"
+                "model": "gemma-2-9b-it"
             }
             
         except Exception as e:
-            print(f"[GeminiChat] Error: {e}")
+            print(f"[GemmaChat] Error: {e}")
             return self._fallback_response(message, language)
     
     def _generate_suggestions(self, message: str, language: str) -> List[str]:
@@ -267,7 +267,7 @@ class GeminiChatService:
         return lang_suggestions["default"]
     
     def _fallback_response(self, message: str, language: str) -> Dict:
-        """Fallback response when Gemini is unavailable"""
+        """Fallback response when Gemma is unavailable"""
         fallback_messages = {
             "en": "I'm currently unable to connect to my AI service. Please try again in a moment, or check your internet connection.",
             "hi": "मैं वर्तमान में अपनी AI सेवा से कनेक्ट करने में असमर्थ हूं। कृपया कुछ देर बाद पुनः प्रयास करें।",
@@ -294,11 +294,11 @@ class GeminiChatService:
 
 
 # Singleton instance
-_gemini_service: Optional[GeminiChatService] = None
+_gemma_service: Optional[GemmaChatService] = None
 
-def get_gemini_service(api_key: str) -> GeminiChatService:
-    """Get or create Gemini service instance"""
-    global _gemini_service
-    if _gemini_service is None:
-        _gemini_service = GeminiChatService(api_key)
-    return _gemini_service
+def get_gemma_service(api_key: str) -> GemmaChatService:
+    """Get or create Gemma service instance"""
+    global _gemma_service
+    if _gemma_service is None:
+        _gemma_service = GemmaChatService(api_key)
+    return _gemma_service

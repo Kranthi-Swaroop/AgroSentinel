@@ -13,5 +13,5 @@ services:
         sync: false
       - key: OPENWEATHERMAP_API_KEY
         sync: false
-      - key: GEMINI_API_KEY
+      - key: AI_API_KEY
         sync: false

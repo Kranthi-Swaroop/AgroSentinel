@@ -1,30 +1,30 @@
 """
 AgroSentinel Chat API Routes
-Multi-language AI chat assistant endpoints with Gemini AI
+Multi-language AI chat assistant endpoints with Gemma AI
 """
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
 from app.services.chat_assistant import generate_response, get_suggestions
-from app.services.gemini_chat import get_gemini_service, GeminiChatService
+from app.services.gemma_chat import get_gemma_service, GemmaChatService
 from app.services.database import Database
 from app.config import get_settings
 from datetime import datetime
 
 router = APIRouter(prefix="/api/chat", tags=["Chat"])
 
-# Initialize Gemini service
-_gemini_service: Optional[GeminiChatService] = None
+# Initialize Gemma service
+_gemma_service: Optional[GemmaChatService] = None
 
 def get_chat_service():
-    """Get the Gemini chat service (lazy initialization)"""
-    global _gemini_service
-    if _gemini_service is None:
+    """Get the Gemma chat service (lazy initialization)"""
+    global _gemma_service
+    if _gemma_service is None:
         settings = get_settings()
-        if settings.gemini_api_key:
-            _gemini_service = get_gemini_service(settings.gemini_api_key)
-    return _gemini_service
+        if settings.ai_api_key:
+            _gemma_service = get_gemma_service(settings.ai_api_key)
+    return _gemma_service
 
 
 class ChatRequest(BaseModel):
@@ -35,6 +35,7 @@ class ChatRequest(BaseModel):
 
 
 class ChatResponse(BaseModel):
+    # Field names should match the response from GemmaChatService.send_message
     response: str
     suggestions: List[str]
     intent: str
@@ -54,16 +55,16 @@ class ChatHistoryItem(BaseModel):
 async def send_message(request: ChatRequest):
     """
     Send a message to the AI chat assistant
-    Uses Gemini AI for intelligent responses
+    Uses Gemma AI for intelligent responses
     Supports multiple languages: en, hi, te, ta, kn
     """
     try:
-        # Try Gemini first
-        gemini = get_chat_service()
+        # Try Gemma first
+        gemma = get_chat_service()
         
-        if gemini and gemini.model:
-            # Use Gemini AI
-            result = await gemini.send_message(
+        if gemma and gemma.model:
+            # Use Gemma AI
+            result = await gemma.send_message(
                 message=request.message,
                 language=request.language,
                 session_id=request.session_id

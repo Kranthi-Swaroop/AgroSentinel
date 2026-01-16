@@ -10,7 +10,7 @@ An intelligent mobile-first web app that helps farmers detect crop diseases, get
 - 🌤️ **Weather-Correlated Risk** - Real-time weather integration for disease risk assessment
 - 💊 **ICAR Treatment Database** - Authentic medication recommendations from Indian agricultural research
 - 🗺️ **Field Map** - Drone view simulation with satellite imagery and disease clustering
-- 🤖 **AI Chat Assistant** - Gemini 2.0 powered farming assistant
+- 🤖 **AI Chat Assistant** - Gemma 2 powered farming assistant
 - 🌐 **Multi-Language** - English, Hindi, Telugu, Tamil, Kannada
 - 📱 **PWA Offline Mode** - Works without internet, syncs when connected
 - 🌙 **Dark/Light Theme** - Eye-friendly interface
@@ -19,11 +19,11 @@ An intelligent mobile-first web app that helps farmers detect crop diseases, get
 
 | Layer | Technology |
 |-------|------------|
-| **Backend** | FastAPI, ONNX Runtime, Motor (MongoDB), Google Gemini AI |
+| **Backend** | FastAPI, ONNX Runtime, Motor (MongoDB), Google Gemma AI |
 | **Frontend** | React 18, Vite 5, Tailwind CSS, Leaflet Maps, Framer Motion |
 | **Database** | MongoDB |
 | **ML Model** | EfficientNet-B3 (ONNX format, 43.8 MB) |
-| **APIs** | OpenWeatherMap, Google Gemini 2.0 |
+| **APIs** | OpenWeatherMap, Google Gemma 2 |
 
 ## 🚀 Quick Start
 
@@ -43,7 +43,7 @@ Create `.env` file:
 ```env
 MONGODB_URI=mongodb://localhost:27017/agrosentinel
 OPENWEATHERMAP_API_KEY=your_openweathermap_key
-GEMINI_API_KEY=your_gemini_api_key
+AI_API_KEY=your_google_api_key
 ```
 
 Run backend:
@@ -121,4 +121,4 @@ MIT License - Feel free to use for your hackathon or project!
 - PlantVillage Dataset
 - ICAR (Indian Council of Agricultural Research)
 - OpenWeatherMap API
-- Google Gemini AI
+- Google Gemma AI
